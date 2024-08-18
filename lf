@@ -4,7 +4,7 @@
 # Goes over the dotfiles in directory, and links them to the home directory
 # Script written by me
 
-files=$(find . -name ".*");
+files=$(find . -maxdepth 1 -name ".*");
 
 for file in $files
 do
@@ -14,7 +14,7 @@ do
         echo "${file} is a file, linking"
 
         # please dont break xd
-        ln -s "$(readlink -f "$file")" "$HOME"
+        ln -s "$(readlink -f "$file")" "$HOME/$(basename "$file")"
 
         echo "${file} linked, continuing"
     fi
