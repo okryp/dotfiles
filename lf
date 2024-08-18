@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Link Files script
+# Goes over the dotfiles in directory, and links them to the home directory
+# Script written by me
+
+files=$(find . -name ".*");
+
+for file in $files
+do
+    if [ -d "${file}" ] ; then
+        echo "${file} is a directory, skipping"
+    else
+        echo "${file} is a file, linking"
+
+        # please dont break xd
+        ln -s "$(readlink -f "$file")" "$HOME"
+
+        echo "${file} linked, continuing"
+    fi
+done
